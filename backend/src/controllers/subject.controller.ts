@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import Student from "../models/student"
 import Subject from "../models/subject"
 
 function getSubjects (req:Request, res:Response): void {
@@ -37,8 +38,24 @@ function addSubject (req: Request, res: Response): void {
     })
 }
 
-function addStudent (req: Request, res: Response): void {
-    
+async function addStudent (req: Request, res: Response) {
+    const student = await Student.findOne({"_id": req.params.idStudent});
+
+    if(student){
+        Subject.updateOne({"_id": req.params.id}, {$addToSet: {students: student?._id}}).then(data => { 
+            if (data.nModified == 1) { 
+                console.log("Student added successfully"); 
+                return res.status(201).send({message: 'Student added successfully'}); 
+            } else { 
+                return res.status(409).json('Student already exists!!!') 
+        } }).catch((err) => { 
+            console.log("error ", err); 
+            return res.status(500).json(err); 
+        }); 
+    }
+    else{
+        return res.status(404).send({message: 'Student not found'}); 
+    }
 }
 
 export default { getSubjects, getSubject, addSubject, addStudent };
