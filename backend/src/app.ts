@@ -23,8 +23,10 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 //Llama a las rutas de la API
-app.use('/student', studentRoutes);
-app.use('/subject', subjectRoutes);
+/*app.use('/', (req, res) => {
+    return res.send('Los servicios son: /students, /subjects')});*/
+app.use('/students', studentRoutes);
+app.use('/subjects', subjectRoutes);
 
 //Exportamos fichero como 'app'
 export default app;

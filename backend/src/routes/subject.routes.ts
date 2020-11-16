@@ -11,8 +11,8 @@ const router = Router();
 - ver detalle de un alumno dentro de una asignatura (CU_4)*/
 
 router.get('/', subjectController.getSubjects);
-//router.get('/:id', subjectController.getSubject);
-//router.post('/new', subjectController.addSubject);
+router.get('/:id', subjectController.getSubject);
+router.post('/new', subjectController.addSubject);
 //router.post('/newStudent/:subjectName', subjectController.addStudentToSubject);
 
 //Exportamos router para usar rutas en app.ts
