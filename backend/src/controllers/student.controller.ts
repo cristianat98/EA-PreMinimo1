@@ -3,7 +3,7 @@ import Student from "../models/student"
 import {IPhone} from "../models/phone"
 
 function getStudents (req:Request, res:Response): void {
-    Student.find({}).populate('students').then((data)=>{
+    Student.find({}).then((data)=>{
         let status: number = 200;
         if(data==null) status = 404;
         console.log(data);
@@ -15,7 +15,7 @@ function getStudents (req:Request, res:Response): void {
 };
 
 function getStudent(req:Request, res:Response): void {
-    Student.find({"nombre":req.params.nombre}).populate('students').then((data)=>{
+    Student.find({"_id":req.params.id}).then((data)=>{
         let status: number = 200;
         if(data==null) status = 404;
         console.log(data);
@@ -40,6 +40,7 @@ function newStudent (req: Request, res: Response): void {
     })
 }
 
+//FUNCIONES ADDICIONALES
 function updateStudent (req: Request, res: Response){
     const id: string = req.params.id;
     const name: string = req.body.name;

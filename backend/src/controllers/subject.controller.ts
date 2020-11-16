@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Subject from "../models/subject"
 
 function getSubjects (req:Request, res:Response): void {
-    Subject.find({}).populate('subjects').then((data)=>{
+    Subject.find({}).populate('students').then((data)=>{
         let status: number = 200;
         if(data==null) status = 404;
         console.log(data);
@@ -14,7 +14,7 @@ function getSubjects (req:Request, res:Response): void {
 };
 
 function getSubject(req:Request, res:Response): void {
-    Subject.find({"nombre":req.params.nombre}).populate('subjects').then((data)=>{
+    Subject.find({"_id":req.params.id}).populate('students').then((data)=>{
         let status: number = 200;
         if(data==null) status = 404;
         console.log(data);
@@ -37,4 +37,8 @@ function addSubject (req: Request, res: Response): void {
     })
 }
 
-export default { getSubjects, getSubject, addSubject };
+function addStudent (req: Request, res: Response): void {
+    
+}
+
+export default { getSubjects, getSubject, addSubject, addStudent };

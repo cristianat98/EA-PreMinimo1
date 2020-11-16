@@ -13,6 +13,8 @@ const router = Router();
 router.get('/', studentController.getStudents);
 router.get('/:id', studentController.getStudent);
 router.post('/new',studentController.newStudent);
+
+//RUTAS ADDICIONALES
 router.post('/:id/update', studentController.updateStudent);
 router.post('/:id/delete', studentController.deleteStudent);
 
